@@ -12,6 +12,6 @@ router.get('/login',(req, res, next) =>{
     res.sendFile(path.join(__dirname,'../','views', 'login.html'));
 })
 router.post('/user', controllerData.PostNewUserData);
-
+router.post('/login',controllerData.GetuserDataAndlogin);
 
 module.exports = router;
