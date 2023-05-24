@@ -1,5 +1,5 @@
 
-const userlogin = require('../models/userlogin');
+const userlogin = require('../models/newuser');
 
 // it is used to check oure input value from frontend is valid or not
 function IsStringInvalid(str) {
@@ -11,7 +11,7 @@ function IsStringInvalid(str) {
 }
 
 
-exports.PostUserloginData = async (req, res, next) => {
+exports.PostNewUserData = async (req, res, next) => {
 
     try {
         const Name = req.body.Name;
@@ -24,14 +24,13 @@ exports.PostUserloginData = async (req, res, next) => {
             return res.status(400).json({ err: ".somthing is missing" })
         }
 
-        let userlogindataPost = await userlogin.create({
+        let NewuserdataPost = await userlogin.create({
             Name: Name,
             Email: Email,
             Phone: Phone,
             Password: Password
         })
-
-        // res.status(201).json(userlogindataPost);
+        // res.status(201).json(NewuserdataPost);
         res.status(201).json({massage: 'succesfully created'});
 
     } catch (err) {

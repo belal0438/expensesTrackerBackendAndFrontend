@@ -1,28 +1,22 @@
+const myForm = document.getElementById('my_form');
 
-
-const Myform = document.getElementById("my_form");
-
-Myform.addEventListener('submit', onsubmit);
+myForm.addEventListener('submit', onsubmit);
 
 async function onsubmit(eve) {
-    try {
-        eve.preventDefault();
-        const Name = document.getElementById('username');
-        const Email = document.getElementById('useremail');
-        const Phone = document.getElementById('usernumber');
-        const Password = document.getElementById('userpassword');
+    try{
+    eve.preventDefault();
+    const Name = document.getElementById('username');
+    const Email = document.getElementById('useremail');
 
+    let obj = {
 
-        let obj = {
-            Name: Name.value,
-            Email: Email.value,
-            Phone: Phone.value,
-            Password: Password.value
-        }
-        // console.log(obj);
-        let userloginData = await axios.post('http://localhost:3000/login', obj)
-        console.log(userloginData);
-    } catch (err) {
+        Name: Name.value,
+        Email: Email.value
+    }
+    // console.log(obj);
+
+   await axios.post("http://localhost:3000/login",obj);
+    } catch(err){
         console.log(err);
     }
 }

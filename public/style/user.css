@@ -1,0 +1,45 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(164, 247, 247);
+}
+
+#my_form {
+
+    text-align: center;
+    height: 70vh;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.head {
+    margin: 8px 0px;
+}
+
+.nameContainer,
+.emailContainer,
+.numberContainer,
+.submitForm,
+.passwordContainer {
+    margin: 8px 5px;
+    font-size: 20px;
+}
+
+.headcontainer {
+    padding-top: 10px;
+    padding-left: 20px;
+    background-color: rgb(47, 45, 45);
+    text-align: center;
+    height: 40px;
+    display: flex;
+    gap: 50px;
+}
+
+#user {
+    color: aliceblue;
+    text-decoration: none;
+}
+
+#login {
+    color: aliceblue;
+    text-decoration: none;
+}
