@@ -3,6 +3,7 @@ const express = require('express');
 app = express();
 
 const bodyPaer = require('body-parser');
+
 app.use(bodyPaer.json())
 
 app.use(express.static(path.join(__dirname, 'public')))

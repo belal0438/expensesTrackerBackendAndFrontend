@@ -1,12 +1,14 @@
 
 const userlogin = require('../models/userlogin');
 
-
-
-// Name: Name.value,
-// Email: Email.value,
-// Phone: Phone.value,
-// Password: Password.value
+// it is used to check oure input value from frontend is valid or not
+function IsStringInvalid(str) {
+    if (str == undefined || str.length === 0) {
+        return true
+    } else {
+        return false
+    }
+}
 
 
 exports.PostUserloginData = async (req, res, next) => {
@@ -17,17 +19,26 @@ exports.PostUserloginData = async (req, res, next) => {
         const Phone = req.body.Phone;
         const Password = req.body.Password;
 
-      let userlogindataPost =  await userlogin.create({
+
+        if (IsStringInvalid(Name) || IsStringInvalid(Email) || IsStringInvalid(Phone) || IsStringInvalid(Password)) {
+            return res.status(400).json({ err: ".somthing is missing" })
+        }
+
+        let userlogindataPost = await userlogin.create({
             Name: Name,
             Email: Email,
             Phone: Phone,
             Password: Password
         })
 
-    res.status(201).json(userlogindataPost);
+        // res.status(201).json(userlogindataPost);
+        res.status(201).json({massage: 'succesfully created'});
 
-    } catch(err){
-      res.status(500).json(err);
+    } catch (err) {
+        res.status(500).json(err);
     }
-    
+
 }
+
+
+

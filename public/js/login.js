@@ -13,7 +13,6 @@ async function onsubmit(eve) {
         const Password = document.getElementById('userpassword');
 
 
-
         let obj = {
             Name: Name.value,
             Email: Email.value,
