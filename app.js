@@ -13,8 +13,6 @@ const routersData = require('./routes/router');
 
 app.use(routersData);
 
-
-
 sequelize
     // .sync({ force: true })
     .sync()
