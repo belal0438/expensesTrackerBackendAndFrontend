@@ -21,6 +21,14 @@ async function onsubmit(eve) {
         // console.log(obj);
         let userloginData = await axios.post('http://localhost:3000/user', obj)
         console.log(userloginData);
+
+        document.getElementById('username').value = "";
+        document.getElementById('useremail').value = "";
+        document.getElementById('usernumber').value = "";
+        document.getElementById('userpassword').value = "";
+
+        document.location.href =  "http://localhost:3000/expenses";
+
     } catch (err) {
         console.log(err);
     }

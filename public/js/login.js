@@ -3,18 +3,6 @@ const myForm = document.getElementById('my_form');
 myForm.addEventListener('submit', onsubmit);
 
 
-// // get data from userData for Email Id and Password
-
-// async function GetdatafromUser(){
-//     try {
-//         let getdata = await axios.get("http://localhost:4000/getuser");
-//        console.log(getdata.data);
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-// GetdatafromUser()
-
 async function onsubmit(eve) {
     try {
         eve.preventDefault();
@@ -27,6 +15,12 @@ async function onsubmit(eve) {
         // console.log(obj);
         let loginData = await axios.post("http://localhost:3000/login", obj);
         console.log(loginData);
+
+        document.getElementById('useremail').value = "";
+        document.getElementById('userpassword').value = "";
+
+    //  document.location.href =  "http://localhost:3000/expenses";
+
     } catch (err) {
         console.log(err);
     }

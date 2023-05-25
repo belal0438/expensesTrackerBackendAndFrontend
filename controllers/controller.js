@@ -1,6 +1,7 @@
 
 const userlogin = require('../models/newuser');
 const bcrypt = require("bcrypt");
+const Expenses = require('../models/expenses');
 
 // it is used to check oure input value from frontend is valid or not
 function IsStringInvalid(str) {
@@ -10,6 +11,7 @@ function IsStringInvalid(str) {
         return false
     }
 }
+
 
 
 exports.PostNewUserData = async (req, res, next) => {
@@ -62,7 +64,7 @@ exports.GetuserDataAndlogin = async (req, res, next) => {
         if (userData.length > 0) {
             bcrypt.compare(Password, userData[0].Password, (err, result) => {
                 if (err) {
-                    res.status(500).json({ success: false, message: "somthing went wrong" })
+                    throw new Error('somthing went wrong')
                 }
                 if (result == true) {
                     res.status(200).json({ success: true, message: "User logged in succesfull" })
@@ -82,3 +84,55 @@ exports.GetuserDataAndlogin = async (req, res, next) => {
 
 }
 
+
+
+
+exports.PostExpensesData = async (req, res, next) => {
+    try {
+        // console.log(req.body);
+        const amount = req.body.amount;
+        const descript = req.body.descript;
+        const select = req.body.select;
+
+        if (IsStringInvalid(amount) || IsStringInvalid(descript) || IsStringInvalid(select)) {
+            return res.status(400).json({ err: ".somthing is missing" })
+        }
+        let ExpnsesdataPost = await Expenses.create({
+            amount: amount,
+            descript: descript,
+            select: select
+        })
+        // res.status(201).json(ExpnsesdataPost);
+        res.status(201).json({ message: 'succesfully Added' });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+
+exports.DeleteExpenses = async (req, res, next) => {
+    try {
+        const ProdId = req.params.id;
+        let DelExpens = Expenses.findByPk(ProdId);
+        Expenses.destroy({ where: { id: ProdId } })
+        res.status(200).json(DelExpens);
+    } catch (err) {
+        res.status(500).json({
+            Error: err
+        })
+    }
+}
+
+
+
+
+exports.GetExpensesData = async (req, res, next) => {
+    try {
+        let getexpensesData = await Expenses.findAll()
+        res.status(201).json(getexpensesData)
+    } catch (err) {
+        res.status(500).json({
+            Error: err
+        })
+    }
+}
