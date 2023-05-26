@@ -1,17 +1,23 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors')
+
 app = express();
 
 const bodyPaer = require('body-parser');
 
 app.use(bodyPaer.json())
+app.use(cors())
+// app.use(express.static(path.join(__dirname, 'public')))
 
-app.use(express.static(path.join(__dirname, 'public')))
+
+
 const sequelize = require('./util/database')
 const routersData = require('./routes/router');
 
 
 app.use(routersData);
+
 
 sequelize
     // .sync({ force: true })

@@ -19,7 +19,7 @@ async function onsubmit(eve) {
         document.getElementById('useremail').value = "";
         document.getElementById('userpassword').value = "";
 
-    //  document.location.href =  "http://localhost:3000/expenses";
+        window.location.href = "../views/expenses.html";
 
     } catch (err) {
         console.log(err);

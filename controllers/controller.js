@@ -89,7 +89,6 @@ exports.GetuserDataAndlogin = async (req, res, next) => {
 
 exports.PostExpensesData = async (req, res, next) => {
     try {
-        // console.log(req.body);
         const amount = req.body.amount;
         const descript = req.body.descript;
         const select = req.body.select;
