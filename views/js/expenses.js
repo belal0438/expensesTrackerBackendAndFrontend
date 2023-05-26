@@ -6,8 +6,9 @@ Myform.addEventListener('submit', onsubmit);
 
 async function GetExpensedata() {
     try {
-        let getdata = await axios.get("http://localhost:3000/getexpenses");
-        // console.log(getdata.data);
+        const token = localStorage.getItem('token');
+        let getdata = await axios.get("http://localhost:3000/getexpenses", { headers: { 'Authorization': token } });
+        console.log(getdata.data);
         getdata.data.forEach(element => {
             DisplayOnScreen(element);
         });
@@ -33,10 +34,10 @@ async function onsubmit(eve) {
             select: select.options[select.selectedIndex].value
         }
         // console.log(obj);
-        let userloginData = await axios.post('http://localhost:3000/expenses', obj)
+        const token = localStorage.getItem('token');
+        let userloginData = await axios.post('http://localhost:3000/expenses', obj, { headers: { 'Authorization': token } })
         // console.log(userloginData);
         DisplayOnScreen(obj);
-
 
         document.getElementById('amount').value = "";
         document.getElementById('descript').value = "";
@@ -55,27 +56,29 @@ function DisplayOnScreen(obj) {
 
     const Delbtn = document.createElement('button');
     Delbtn.innerText = "Delete";
-    
+
     const Editbtn = document.createElement('button')
     Editbtn.innerText = "Eddit";
 
     li.innerHTML = `Amount:- ${obj.amount},   Description:- ${obj.descript},  Category:- ${obj.select}  `;
 
 
-    Delbtn.onclick = async(eve) => {
-       await axios.delete(`http://localhost:3000/delete/${obj.id}`)
-       ExpesesUl.removeChild(li);
+    Delbtn.onclick = async (eve) => {
+        const token = localStorage.getItem('token');
+        await axios.delete(`http://localhost:3000/delete/${obj.id}`,{ headers: { 'Authorization': token }})
+        ExpesesUl.removeChild(li);
     }
 
 
 
-    
+
     Editbtn.onclick = async (eve) => {
         try {
-            await axios.delete(`http://localhost:3000/delete/${obj.id}`)
+            const token = localStorage.getItem('token');
+            await axios.delete(`http://localhost:3000/delete/${obj.id}`,{ headers: { 'Authorization': token }})
 
             document.getElementById('amount').value = obj.amount;
-            document.getElementById('descript').value =obj.descript;
+            document.getElementById('descript').value = obj.descript;
             document.getElementById('select').value = obj.select;
             ExpesesUl.removeChild(li);
         } catch (err) {
@@ -83,7 +86,6 @@ function DisplayOnScreen(obj) {
         }
 
     }
-
     li.appendChild(Editbtn);
     li.appendChild(Delbtn);
     ExpesesUl.appendChild(li);

@@ -14,11 +14,14 @@ async function onsubmit(eve) {
         }
         // console.log(obj);
         let loginData = await axios.post("http://localhost:3000/login", obj);
-        console.log(loginData);
+        // console.log(loginData);
+        alert(loginData.data.message);
+
+        localStorage.setItem('token',loginData.data.token)
 
         document.getElementById('useremail').value = "";
         document.getElementById('userpassword').value = "";
-
+        
         window.location.href = "../views/expenses.html";
 
     } catch (err) {

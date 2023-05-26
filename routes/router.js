@@ -2,16 +2,19 @@
 const path = require('path');
 const express = require('express');
 
-const controllerData = require('../controllers/controller')
+const controllerUser = require('../controllers/user')
+const controllerExpenses = require('../controllers/expenses');
+const controllerLogin = require('../controllers/login');
+const authorization = require('../authorization/author');
 const router = express.Router();
 
 
 
-router.post('/user', controllerData.PostNewUserData);
-router.post('/login',controllerData.GetuserDataAndlogin);
+router.post('/user', controllerUser.PostNewUserData);
+router.post('/login', controllerLogin.GetuserDataAndlogin);
 
-router.post('/expenses',controllerData.PostExpensesData);
-router.delete('/delete/:id',controllerData.DeleteExpenses);
-router.get('/getexpenses',controllerData.GetExpensesData);
+router.post('/expenses', authorization.Authenticate, controllerExpenses.PostExpensesData);
+router.delete('/delete/:id', authorization.Authenticate, controllerExpenses.DeleteExpenses);
+router.get('/getexpenses', authorization.Authenticate, controllerExpenses.GetExpensesData);
 
 module.exports = router;

@@ -2,13 +2,17 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors')
 
+
+const user = require('./models/newuser');
+const expenses = require('./models/expenses');
+
 app = express();
 
 const bodyPaer = require('body-parser');
 
 app.use(bodyPaer.json())
 app.use(cors())
-// app.use(express.static(path.join(__dirname, 'public')))
+
 
 
 
@@ -17,6 +21,10 @@ const routersData = require('./routes/router');
 
 
 app.use(routersData);
+
+user.hasMany(expenses);
+expenses.belongsTo(user)
+
 
 
 sequelize
