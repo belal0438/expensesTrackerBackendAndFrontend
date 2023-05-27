@@ -19,7 +19,8 @@ const userlogin = sequelize.define('user', {
         unique: true
     },
     Phone: Sequelize.DOUBLE,
-    Password: Sequelize.STRING
+    Password: Sequelize.STRING,
+    ispremiumuser:Sequelize.BOOLEAN,
 })
 
 module.exports = userlogin

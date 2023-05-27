@@ -8,7 +8,10 @@ body{
     text-align: center;
     margin-top: auto;
 }
-
+#rzp-button1{
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
 #my_form {
 
     text-align: center;
@@ -18,7 +21,10 @@ body{
 .head {
     margin: 8px 0px;
 }
-
+#premiunList{
+ display: flex;
+ text-align: left;
+}
 .nameContainer,
 .emailContainer,
 .numberContainer,
