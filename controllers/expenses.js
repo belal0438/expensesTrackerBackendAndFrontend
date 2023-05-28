@@ -2,7 +2,8 @@
 
 const { where } = require('sequelize');
 const Expenses = require('../models/expenses');
-const User = require('../models/newuser')
+const User = require('../models/newuser');
+const sequelize = require('../util/database');
 // it is used to check oure input value from frontend is valid or not
 function IsStringInvalid(str) {
     if (str == undefined || str.length === 0) {
@@ -14,6 +15,7 @@ function IsStringInvalid(str) {
 
 
 exports.PostExpensesData = async (req, res, next) => {
+    const t = await sequelize.transaction()
     try {
         const amount = req.body.amount;
         const descript = req.body.descript;
@@ -28,26 +30,48 @@ exports.PostExpensesData = async (req, res, next) => {
             descript: descript,
             select: select,
             userId: req.getuserdata.id
-        })
+        }, { transaction: t })
+
         // console.log(ExpnsesdataPost.amount)
         totalExpesesAmount = Number(req.getuserdata.totalexpenses) + Number(ExpnsesdataPost.amount);
-        await User.update({ totalexpenses: totalExpesesAmount }, { where: { id: req.getuserdata.id } })
-
+        const updateUserData = await User.update({
+            totalexpenses: totalExpesesAmount
+        }, {
+            where: { id: req.getuserdata.id },
+            transaction: t
+        });
         // console.log(totalExpesesAmount)
-
         // res.status(201).json(ExpnsesdataPost);
+
+        await t.commit()
         res.status(201).json({ message: 'succesfully Added' });
     } catch (err) {
+        await t.rollback()
         res.status(500).json(err);
     }
 }
 
 exports.DeleteExpenses = async (req, res, next) => {
+    const t = await sequelize.transaction()
     try {
         const ProdId = req.params.id;
-        Expenses.destroy({ where: { id: ProdId, userId: req.getuserdata.id } })
+
+        const expansesData = await Expenses.findByPk(ProdId);
+        // console.log(expansesData.amount);
+
+        totalExpesesAmount = Number(req.getuserdata.totalexpenses) - Number(expansesData.amount);
+        const updateUserData = await User.update({
+            totalexpenses: totalExpesesAmount
+        }, {
+            where: { id: req.getuserdata.id },
+            transaction: t
+        });
+        await Expenses.destroy({ where: { id: ProdId, userId: req.getuserdata.id } })
+
+        await t.commit()
         res.status(200).json({ data: 'data hase deleted succesfull' });
     } catch (err) {
+        await t.rollback()
         res.status(500).json({
             Error: err
         })
