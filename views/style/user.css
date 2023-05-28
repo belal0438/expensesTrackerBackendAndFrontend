@@ -25,6 +25,15 @@ body{
  display: flex;
  text-align: left;
 }
+
+#BtnLeader{
+margin-left: 25px;
+}
+
+#leader,#leaderboard{
+    text-align: center;
+}
+
 .nameContainer,
 .emailContainer,
 .numberContainer,

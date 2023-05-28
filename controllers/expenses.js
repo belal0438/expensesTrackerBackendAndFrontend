@@ -51,7 +51,7 @@ exports.DeleteExpenses = async (req, res, next) => {
 
 exports.GetExpensesData = async (req, res, next) => {
     try {
-        let getexpensesData = await Expenses.findAll({ where: { userId: req.getuserdata.id } })
+        let getexpensesData = await Expenses.findAll({ where: { userId: req.getuserdata.id }})
         res.status(201).json(getexpensesData)
     } catch (err) {
         res.status(500).json({

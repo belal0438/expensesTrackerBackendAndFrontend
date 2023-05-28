@@ -47,5 +47,18 @@ exports.PostNewUserData = async (req, res, next) => {
 
 
 
+exports.GetUserData = async (req, res, next) => {
+    try {
+        let getUserData = await userlogin.findAll({ where: { Password: req.getuserdata.Password }})
+        // console.log(getUserData);
+        res.status(201).json(getUserData)
+    } catch (err) {
+        res.status(500).json({
+            Error: err
+        })
+    }
+}
+
+
 
 

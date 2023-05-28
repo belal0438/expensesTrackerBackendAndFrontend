@@ -14,13 +14,15 @@ app.use(bodyPaer.json())
 app.use(cors())
 
 
-
-
 const sequelize = require('./util/database')
 const routersData = require('./routes/router');
+const ExpenseRouter = require('./routes/expenses');
+const premiumFeature = require('./routes/premiumfeatur')
 
 
+app.use(ExpenseRouter);
 app.use(routersData);
+app.use(premiumFeature);
 
 user.hasMany(expenses);
 expenses.belongsTo(user)

@@ -1,6 +1,32 @@
 
 const rzp_button = document.getElementById('rzp-button1');
 
+
+async function GetUserdata() {
+    try {
+        const token = localStorage.getItem('token');
+        let getdata = await axios.get("http://localhost:3000/getUserdata", { headers: { 'Authorization': token } });
+        // console.log(getdata.data);
+        getdata.data.forEach(element => {
+            // console.log(element)
+            if (element.ispremiumuser == true) {
+                premiumFeatures();
+                LeaderBoard();
+            }
+        });
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+GetUserdata()
+
+
+
+
+
+
+
 rzp_button.onclick = async (eve) => {
     try {
         eve.preventDefault();
@@ -33,6 +59,11 @@ rzp_button.onclick = async (eve) => {
 
 
 
+
+
+
+
+
 async function premiumFeatures() {
     try {
         premiunList = document.getElementById('premiunList');
@@ -41,11 +72,51 @@ async function premiumFeatures() {
         Premium = document.getElementById('Premium')
         button = document.createElement('button');
         button.innerText = "you are a premium user now";
+
+
+        leaderbordBtn = document.createElement('button')
+        leaderbordBtn.id = "BtnLeader";
+        leaderbordBtn.innerText = "Show LeaderBoard";
+
+
+
         li.append(button);
+        li.append(leaderbordBtn);
         premiunList.remove(Premium)
         premiunListDon.append(li);
     }
     catch (err) {
         console.log(err)
     }
+}
+
+
+
+
+function LeaderBoard() {
+    try {
+        let leaderboard = document.getElementById('leaderboard');
+        let leaderHeading = document.getElementById('leader');
+        let leaderbordBtn = document.getElementById('BtnLeader');
+
+        leaderbordBtn.onclick = async(eve) => {
+            const token = localStorage.getItem('token');
+
+            const getUserLeaderBoardArray = await axios.get('http://localhost:3000/premium/showLeaderBoard', { headers: { 'Authorization': token } });
+            console.log(getUserLeaderBoardArray)
+            leaderHeading.innerText = "Show Leader Bord";
+
+            // [{"name":"belal","total_cost":1100},{"name":"belal","total_cost":1300}]
+
+            getUserLeaderBoardArray.data.forEach((Element) => {
+                const li = document.createElement('li');
+                li.innerHTML = ` Name:  ${Element.name}  Total_cost:  ${Element.total_cost} `
+                leaderboard.append(li);
+            })
+
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
 }

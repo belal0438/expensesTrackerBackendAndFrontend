@@ -7,7 +7,7 @@ Myform.addEventListener('submit', onsubmit);
 async function GetExpensedata() {
     try {
         const token = localStorage.getItem('token');
-        let getdata = await axios.get("http://localhost:3000/getexpenses", { headers: { 'Authorization': token } });
+        let getdata = await axios.get("http://localhost:3000/expenses/getexpenses", { headers: { 'Authorization': token } });
         console.log(getdata.data);
         getdata.data.forEach(element => {
             DisplayOnScreen(element);
@@ -35,7 +35,7 @@ async function onsubmit(eve) {
         }
         // console.log(obj);
         const token = localStorage.getItem('token');
-        let userloginData = await axios.post('http://localhost:3000/expenses', obj, { headers: { 'Authorization': token } })
+        let userloginData = await axios.post('http://localhost:3000/expenses/postexpenses', obj, { headers: { 'Authorization': token } })
         // console.log(userloginData);
         DisplayOnScreen(obj);
 
@@ -65,7 +65,7 @@ function DisplayOnScreen(obj) {
 
     Delbtn.onclick = async (eve) => {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:3000/delete/${obj.id}`,{ headers: { 'Authorization': token }})
+        await axios.delete(`http://localhost:3000/expenses/delete/${obj.id}`,{ headers: { 'Authorization': token }})
         ExpesesUl.removeChild(li);
     }
 
@@ -75,7 +75,7 @@ function DisplayOnScreen(obj) {
     Editbtn.onclick = async (eve) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:3000/delete/${obj.id}`,{ headers: { 'Authorization': token }})
+            await axios.delete(`http://localhost:3000/expenses/delete/${obj.id}`,{ headers: { 'Authorization': token }})
 
             document.getElementById('amount').value = obj.amount;
             document.getElementById('descript').value = obj.descript;
