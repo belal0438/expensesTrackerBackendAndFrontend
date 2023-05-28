@@ -103,10 +103,8 @@ function LeaderBoard() {
             const token = localStorage.getItem('token');
 
             const getUserLeaderBoardArray = await axios.get('http://localhost:3000/premium/showLeaderBoard', { headers: { 'Authorization': token } });
-            console.log(getUserLeaderBoardArray)
+            // console.log(getUserLeaderBoardArray)
             leaderHeading.innerText = "Show Leader Bord";
-
-            // [{"name":"belal","total_cost":1100},{"name":"belal","total_cost":1300}]
 
             getUserLeaderBoardArray.data.forEach((Element) => {
                 const li = document.createElement('li');
