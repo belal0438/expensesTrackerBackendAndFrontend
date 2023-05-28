@@ -2,7 +2,7 @@
 
 const { where } = require('sequelize');
 const Expenses = require('../models/expenses');
-
+const User = require('../models/newuser')
 // it is used to check oure input value from frontend is valid or not
 function IsStringInvalid(str) {
     if (str == undefined || str.length === 0) {
@@ -22,12 +22,19 @@ exports.PostExpensesData = async (req, res, next) => {
         if (IsStringInvalid(amount) || IsStringInvalid(descript) || IsStringInvalid(select)) {
             return res.status(400).json({ err: ".somthing is missing" })
         }
+
         let ExpnsesdataPost = await Expenses.create({
             amount: amount,
             descript: descript,
             select: select,
             userId: req.getuserdata.id
         })
+        // console.log(ExpnsesdataPost.amount)
+        totalExpesesAmount = Number(req.getuserdata.totalexpenses) + Number(ExpnsesdataPost.amount);
+        await User.update({ totalexpenses: totalExpesesAmount }, { where: { id: req.getuserdata.id } })
+
+        // console.log(totalExpesesAmount)
+
         // res.status(201).json(ExpnsesdataPost);
         res.status(201).json({ message: 'succesfully Added' });
     } catch (err) {
@@ -51,7 +58,7 @@ exports.DeleteExpenses = async (req, res, next) => {
 
 exports.GetExpensesData = async (req, res, next) => {
     try {
-        let getexpensesData = await Expenses.findAll({ where: { userId: req.getuserdata.id }})
+        let getexpensesData = await Expenses.findAll({ where: { userId: req.getuserdata.id } })
         res.status(201).json(getexpensesData)
     } catch (err) {
         res.status(500).json({

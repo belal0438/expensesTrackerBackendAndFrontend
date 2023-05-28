@@ -21,6 +21,10 @@ const userlogin = sequelize.define('user', {
     Phone: Sequelize.DOUBLE,
     Password: Sequelize.STRING,
     ispremiumuser:Sequelize.BOOLEAN,
+    totalexpenses: {
+        type: Sequelize.INTEGER,
+        defaultValue:0
+    }
 })
 
 module.exports = userlogin

@@ -8,17 +8,7 @@ const Expense = require('../models/expenses');
 exports.getUserLeaderBoard = async (req, res) => {
     try {
         const leaderBoardForUser = await UserData.findAll({
-            attributes: ['id', 'Name', [sequelize.fn('sum', sequelize.col('expenses.amount')), 'total_cost']],
-            include: [
-
-                {
-                    model: expensesData,
-                    attributes: []
-                }
-
-            ],
-            group: ['user.id'],
-            order: [['total_cost', 'DESC']]
+            order: [['totalexpenses', 'DESC']]
         });
         res.status(201).json(leaderBoardForUser);
     } catch (err) {

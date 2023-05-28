@@ -108,10 +108,9 @@ function LeaderBoard() {
 
             getUserLeaderBoardArray.data.forEach((Element) => {
                 const li = document.createElement('li');
-                li.innerHTML = ` Name:  ${Element.Name}      Total_cost:  ${Element.total_cost} `
+                li.innerHTML = ` Name:  ${Element.Name}      Total_cost:  ${Element.totalexpenses} `
                 leaderboard.append(li);
             })
-
         }
     } catch (err) {
         console.log(err);
