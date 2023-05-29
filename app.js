@@ -18,12 +18,13 @@ const sequelize = require('./util/database')
 const routersData = require('./routes/router');
 const ExpenseRouter = require('./routes/expenses');
 const premiumFeature = require('./routes/premiumfeatur')
+const forgetpassword = require('./routes/password');
 
 
 app.use(ExpenseRouter);
 app.use(routersData);
 app.use(premiumFeature);
-
+app.use(forgetpassword);
 user.hasMany(expenses);
 expenses.belongsTo(user)
 user.hasMany(Order)

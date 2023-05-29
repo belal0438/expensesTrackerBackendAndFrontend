@@ -9,7 +9,7 @@ async function onsubmit(eve) {
         eve.preventDefault();
         const EmailId = document.getElementById('useremail');
 
-        let obj = { emailId: EmailId.value };
+        let obj = { email: EmailId.value };
 
         let UseremaiIdPost = await axios.post("http://localhost:3000/password/forgotpassword", obj);
         
