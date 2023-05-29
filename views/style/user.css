@@ -1,17 +1,19 @@
-body{
+body {
     margin: 0px;
     padding: 0px;
     background-color: rgb(164, 247, 247);
 }
 
-#expensesList{
+#expensesList {
     text-align: center;
     margin-top: auto;
 }
-#rzp-button1{
+
+#rzp-button1 {
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
 }
+
 #my_form {
 
     text-align: center;
@@ -21,16 +23,18 @@ body{
 .head {
     margin: 8px 0px;
 }
-#premiunList{
- display: flex;
- text-align: left;
+
+#premiunList {
+    display: flex;
+    text-align: left;
 }
 
-#BtnLeader{
-margin-left: 25px;
+#BtnLeader {
+    margin-left: 25px;
 }
 
-#leader,#leaderboard{
+#leader,
+#leaderboard {
     text-align: center;
 }
 
@@ -41,6 +45,7 @@ margin-left: 25px;
 .passwordContainer {
     margin: 8px 5px;
     font-size: 20px;
+
 }
 
 .headcontainer {
@@ -62,7 +67,15 @@ margin-left: 25px;
     color: aliceblue;
     text-decoration: none;
 }
-
+.submitForm{
+    display: flex;
+    gap: 30px;
+    text-align: center;
+    margin-left: 40%;
+}
+#forgetPass{
+    font-size: 15px;
+}
 #expenses {
     color: aliceblue;
     text-decoration: none;
