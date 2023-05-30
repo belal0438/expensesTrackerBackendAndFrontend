@@ -43,7 +43,8 @@ rzp_button.onclick = async (eve) => {
                     payment_id: response.razorpay_payment_id
                 }, { headers: { 'Authorization': token } })
                 alert('you are a premium User Now');
-                premiumFeatures()
+                premiumFeatures();
+                fordownloading();
             }
         }
         const rzp1 = new Razorpay(options);
@@ -79,9 +80,15 @@ async function premiumFeatures() {
         leaderbordBtn.innerText = "Show LeaderBoard";
 
 
+        forDowloaddBtn = document.createElement('button')
+        forDowloaddBtn.id = "BtnDownload";
+        forDowloaddBtn.innerText = "Downloading"; 
+
+
 
         li.append(button);
         li.append(leaderbordBtn);
+        li.append(forDowloaddBtn);
         premiunList.remove(Premium)
         premiunListDon.append(li);
     }
@@ -117,3 +124,28 @@ function LeaderBoard() {
     }
 
 }
+
+
+
+
+
+// forDownload
+
+
+
+function fordownloading() {
+    try {
+        let DownloaddBtn = document.getElementById('BtnDownload');
+
+        DownloaddBtn.onclick = async(eve) => {
+            const token = localStorage.getItem('token');
+
+            const getUserDownloadedData = await axios.get('http://localhost:3000/user/Download', { headers: { 'Authorization': token } });
+         console.log(getUserDownloadedData)
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+}
+
