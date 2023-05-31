@@ -1,4 +1,4 @@
-
+const sequelize = require('../util/database');
 const userlogin = require('../models/newuser');
 const bcrypt = require("bcrypt");
 
@@ -14,6 +14,7 @@ function IsStringInvalid(str) {
 
 
 exports.PostNewUserData = async (req, res, next) => {
+    const t = await sequelize.transaction()
     try {
         // console.log(req.body);
         const Name = req.body.Name;
@@ -35,10 +36,12 @@ exports.PostNewUserData = async (req, res, next) => {
                 Password: hash
             })
             // res.status(201).json(NewuserdataPost);
+            await t.commit()
             res.status(201).json({ message: 'succesfully created' });
         })
 
     } catch (err) {
+        await t.rollback()
         res.status(500).json(err);
     }
 

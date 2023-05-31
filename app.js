@@ -6,7 +6,8 @@ const dotenv = require('dotenv');
 const user = require('./models/newuser');
 const expenses = require('./models/expenses');
 const Order = require('./models/orders');
-const forgotpassword = require('./models/forgotpassword')
+const forgotpassword = require('./models/forgotpassword');
+const downloadedUrl = require('./models/download');
 
 app = express();
 dotenv.config();
@@ -33,12 +34,16 @@ app.use(dowloadRout);
 
 user.hasMany(expenses);
 expenses.belongsTo(user)
+
 user.hasMany(Order)
 Order.belongsTo(user)
+
 user.hasMany(forgotpassword)
 forgotpassword.belongsTo(user)
 
 
+user.hasMany(downloadedUrl)
+downloadedUrl.belongsTo(user)
 
 sequelize
     // .sync({ force: true })

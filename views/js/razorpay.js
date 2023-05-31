@@ -13,6 +13,7 @@ async function GetUserdata() {
                 premiumFeatures();
                 LeaderBoard();
                 fordownloading();
+                forDownloadedUrl()
             }
         });
 
@@ -46,6 +47,7 @@ rzp_button.onclick = async (eve) => {
                 alert('you are a premium User Now');
                 premiumFeatures();
                 fordownloading();
+                forDownloadedUrl();
             }
         }
         const rzp1 = new Razorpay(options);
@@ -86,10 +88,16 @@ async function premiumFeatures() {
         forDowloaddBtn.innerText = "Downloading";
 
 
+        forShowDowloaddBtn = document.createElement('button')
+        forShowDowloaddBtn.id = "BtnDownloadedUrl";
+        forShowDowloaddBtn.innerText = " Show Downloaded Url";
+
+
 
         li.append(button);
         li.append(leaderbordBtn);
         li.append(forDowloaddBtn);
+        li.append(forShowDowloaddBtn);
         premiunList.remove(Premium)
         premiunListDon.append(li);
     }
@@ -147,3 +155,33 @@ function fordownloading() {
 }
 
 
+
+async function forDownloadedUrl() {
+    let BtnDownloadedUrl = document.getElementById('BtnDownloadedUrl');
+
+    let DownloadedUrl = document.getElementById('downloadedUrl');
+    let DownloadedUrlHeading = document.getElementById('download');
+
+
+    BtnDownloadedUrl.onclick = async (eve) => {
+        const token = localStorage.getItem('token');
+        const getDownloadedUrlArray = await axios.get('http://localhost:3000/download/getDownloadUrl', { headers: { 'Authorization': token } });
+        //    console.log(getDownloadedUrlArray.data);
+
+        DownloadedUrlHeading.innerText = "Show Downloaded Url";
+        if (getDownloadedUrlArray.data == [] || getDownloadedUrlArray.data.Url == '') {
+            const li = document.createElement('li');
+            li.innerText = "No Downloaded Url";
+            DownloadedUrl.append(li)
+        } else {
+            getDownloadedUrlArray.data.forEach((Element) => {
+                const li = document.createElement('li');
+                li.innerHTML = ` Url:  ${Element.Url} `
+                DownloadedUrl.append(li);
+            })
+
+
+        }
+
+    }
+}
