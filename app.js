@@ -21,13 +21,13 @@ const routersData = require('./routes/router');
 const ExpenseRouter = require('./routes/expenses');
 const premiumFeature = require('./routes/premiumfeatur')
 const forgetpassword = require('./routes/password');
-
+const dowloadRout = require('./routes/download');
 
 app.use(ExpenseRouter);
 app.use(routersData);
 app.use(premiumFeature);
 app.use(forgetpassword);
-
+app.use(dowloadRout);
 
 
 
@@ -37,6 +37,8 @@ user.hasMany(Order)
 Order.belongsTo(user)
 user.hasMany(forgotpassword)
 forgotpassword.belongsTo(user)
+
+
 
 sequelize
     // .sync({ force: true })

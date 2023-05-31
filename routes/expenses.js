@@ -12,7 +12,8 @@ const router = express.Router();
 router.post('/expenses/postexpenses', authorization.Authenticate, controllerExpenses.PostExpensesData);
 router.delete('/expenses/delete/:id', authorization.Authenticate, controllerExpenses.DeleteExpenses);
 
-router.get('/user/Download',authorization.Authenticate, controllerExpenses.downloadExpensesData);
+
+
 
 router.get('/expenses/getexpenses', authorization.Authenticate, controllerExpenses.GetExpensesData);
 

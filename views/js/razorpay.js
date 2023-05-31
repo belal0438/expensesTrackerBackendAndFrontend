@@ -83,7 +83,7 @@ async function premiumFeatures() {
 
         forDowloaddBtn = document.createElement('button')
         forDowloaddBtn.id = "BtnDownload";
-        forDowloaddBtn.innerText = "Downloading"; 
+        forDowloaddBtn.innerText = "Downloading";
 
 
 
@@ -107,7 +107,7 @@ function LeaderBoard() {
         let leaderHeading = document.getElementById('leader');
         let leaderbordBtn = document.getElementById('BtnLeader');
 
-        leaderbordBtn.onclick = async(eve) => {
+        leaderbordBtn.onclick = async (eve) => {
             const token = localStorage.getItem('token');
 
             const getUserLeaderBoardArray = await axios.get('http://localhost:3000/premium/showLeaderBoard', { headers: { 'Authorization': token } });
@@ -132,12 +132,14 @@ function LeaderBoard() {
 function fordownloading() {
     try {
         let DownloaddBtn = document.getElementById('BtnDownload');
-        DownloaddBtn.onclick = async(eve) => {
+        DownloaddBtn.onclick = async (eve) => {
 
             const token = localStorage.getItem('token');
 
             const getUserDownloadedData = await axios.get('http://localhost:3000/user/Download', { headers: { 'Authorization': token } });
-         console.log(getUserDownloadedData)
+            // console.log(getUserDownloadedData.data.fileURl)
+            window.location.href = `${getUserDownloadedData.data.fileURl}`
+
         }
     } catch (err) {
         console.log(err);
