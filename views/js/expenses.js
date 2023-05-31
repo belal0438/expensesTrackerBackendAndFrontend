@@ -8,7 +8,7 @@ async function GetExpensedata() {
     try {
         const token = localStorage.getItem('token');
         let getdata = await axios.get("http://localhost:3000/expenses/getexpenses", { headers: { 'Authorization': token } });
-        console.log(getdata.data);
+        // console.log(getdata.data);
         getdata.data.forEach(element => {
             DisplayOnScreen(element);
         });

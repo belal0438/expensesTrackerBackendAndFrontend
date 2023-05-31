@@ -12,6 +12,7 @@ async function GetUserdata() {
             if (element.ispremiumuser == true) {
                 premiumFeatures();
                 LeaderBoard();
+                fordownloading();
             }
         });
 
@@ -128,16 +129,11 @@ function LeaderBoard() {
 
 
 
-
-// forDownload
-
-
-
 function fordownloading() {
     try {
         let DownloaddBtn = document.getElementById('BtnDownload');
-
         DownloaddBtn.onclick = async(eve) => {
+
             const token = localStorage.getItem('token');
 
             const getUserDownloadedData = await axios.get('http://localhost:3000/user/Download', { headers: { 'Authorization': token } });
@@ -146,6 +142,6 @@ function fordownloading() {
     } catch (err) {
         console.log(err);
     }
-
 }
+
 
