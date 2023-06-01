@@ -12,11 +12,9 @@ const router = express.Router();
 router.post('/expenses/postexpenses', authorization.Authenticate, controllerExpenses.PostExpensesData);
 router.delete('/expenses/delete/:id', authorization.Authenticate, controllerExpenses.DeleteExpenses);
 
-
-
-
 router.get('/expenses/getexpenses', authorization.Authenticate, controllerExpenses.GetExpensesData);
 
+router.get('/expenses/pagination', authorization.Authenticate, controllerExpenses.paginateData);
 
 
 module.exports = router

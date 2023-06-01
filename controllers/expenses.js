@@ -97,3 +97,58 @@ exports.GetExpensesData = async (req, res, next) => {
         })
     }
 }
+
+
+
+
+async function countExpenses() {
+    try {
+        let totalExpenses = 0;
+        Allexpenses = await Expenses.findAll()
+        Allexpenses.forEach(element => {
+            totalExpenses++;
+            element.id;
+        })
+        return totalExpenses
+    } catch (error) {
+
+        return error
+    }
+
+}
+
+// countExpenses()
+
+
+
+
+
+exports.paginateData = async (req, res, next) => {
+    try {
+        page = +req.query.page || 1;
+        const pageSize = +req.query.pageSize || 10
+        totalexpenses = await countExpenses()
+        // console.log("total Expenses>>> ", totalexpenses)
+        let getData = await Expenses.findAll({
+            offset: (page - 1) * pageSize,
+            limit: pageSize,
+            order: [['id', 'DESC']]
+        });
+        // console.log(getData);
+        res.status(200).json({
+            allExpense: getData,
+            currentPage: page,
+            hasNextPage: pageSize * page < totalexpenses,
+            nextPage: page + 1,
+            hasPreviousPage: page > 1,
+            previousPage: page - 1,
+            lastPage: Math.ceil(totalexpenses / pageSize)
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ success: false, Error: error.message })
+    }
+
+}
