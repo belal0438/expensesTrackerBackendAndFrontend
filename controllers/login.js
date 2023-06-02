@@ -16,7 +16,7 @@ function IsStringInvalid(str) {
 
 
 function generateAccesKey(id, Name) {
-    return jwt.sign({ userId: id, name: Name }, 'secretKey')
+    return jwt.sign({ userId: id, name: Name }, `${process.env.SECRET_KEY}`)
 }
 
 

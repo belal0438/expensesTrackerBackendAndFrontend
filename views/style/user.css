@@ -80,3 +80,7 @@ body {
     color: aliceblue;
     text-decoration: none;
 }
+
+#Pagination{
+    text-align: center;
+}

@@ -97,7 +97,7 @@ async function Getdata() {
         const token = localStorage.getItem('token');
         let getdata = await axios.get(`http://localhost:3000/expenses/pagination`, { headers: { 'Authorization': token } });
         // console.log(getdata.data);
-        // // console.log(getdata.data.allExpense); // [{…}, {…}, {…}, {…}]
+        // // console.log(getdata.data.allExpense); 
         // console.log(getdata.data.currentPage);
         showPagination(getdata.data)
     } catch (error) {
@@ -137,11 +137,6 @@ async function showPagination({ currentPage, hasNextPage, nextPage, hasPreviousP
             })
         }
 
-        // if (currentPage !== 1) {
-        //     currBtn.addEventListener('click', (eve) => {
-        //         getProducts(1);
-        //     })
-        // }
 
     }
     catch (err) {
