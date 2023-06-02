@@ -108,58 +108,40 @@ Getdata()
 
 
 
-
-async function pageSize(val) {
-    try {
-        const token = localStorage.getItem('token')
-        // localStorage.setItem('pageSize', `${val}`)
-        localStorage.setItem('pageSize',`${val}`)
-        const page = 1
-        const res = await axios.get(`http://localhost:3000/expenses/pagination?page=${page}&pageSize=${val}`, { headers: { 'Authorization': token } });
-        // console.log(res)
-        res.data.allExpense.forEach(element => {
-            DisplayOnScreen(element);
-        });
-        showPagination(res.data)
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-
-
-
 async function showPagination({ currentPage, hasNextPage, nextPage, hasPreviousPage, previousPage, lastPage }) {
     try {
         const prevBtn = document.getElementById('prev');
         const currBtn = document.getElementById('curr');
         const netxBtn = document.getElementById('next');
 
+
         if (hasPreviousPage) {
             prevBtn.addEventListener('click', () => {
                 // console.log(previousPage)
-                // getProducts(previousPage)
-                pageSize(previousPage)
-            })
+                getProducts(previousPage)
+
+            });
         }
+
+
         currBtn.addEventListener('click', () => {
             // console.log("currentPage")
-            // getProducts(currentPage)
-            pageSize(currentPage)
+            getProducts(currentPage)
         });
+
+
         if (hasNextPage) {
             netxBtn.addEventListener('click', () => {
                 // console.log(nextPage)
-                // getProducts(nextPage)
-                pageSize(nextPage)
+                getProducts(nextPage)
             })
         }
-        if (currentPage !== 1) {
-            currBtn.addEventListener('click', (eve) => {
-                // getProducts(1);
-                pageSize(1);
-            })
-        }
+
+        // if (currentPage !== 1) {
+        //     currBtn.addEventListener('click', (eve) => {
+        //         getProducts(1);
+        //     })
+        // }
 
     }
     catch (err) {
@@ -168,18 +150,20 @@ async function showPagination({ currentPage, hasNextPage, nextPage, hasPreviousP
 }
 
 
-// async function getProducts(page) {
-//     try {
-//         const token = localStorage.getItem('token')
-//         const pageSize = localStorage.getItem('pageSize')
-//         const response = await axios.get(`http://localhost:3000/expenses/pagination?page=${page}&pageSize=${pageSize}`, { headers: { 'Authorization': token } })
-//         // console.log(response)
-//         response.data.allExpense.forEach(element => {
-//             DisplayOnScreen(element);
-//         });
-//     }
-//     catch (err) {
-//         console.log(err)
-//     }
-// }
+async function getProducts(page) {
+    try {
+        const token = localStorage.getItem('token')
+        const response = await axios.get(`http://localhost:3000/expenses/pagination?page=${page}`, { headers: { 'Authorization': token } })
+        console.log(response);
+        const ExpesesUl = document.getElementById('expensesList');
+        ExpesesUl.innerHTML = "";
+        response.data.allExpense.forEach(element => {
+            DisplayOnScreen(element);
+        });
+        showPagination(response.data)
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
 

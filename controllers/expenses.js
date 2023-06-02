@@ -126,7 +126,7 @@ async function countExpenses() {
 exports.paginateData = async (req, res, next) => {
     try {
         page = +req.query.page || 1;
-        const pageSize = +req.query.pageSize || 10
+        const pageSize = +req.query.pageSize || 3;
         totalexpenses = await countExpenses()
         // console.log("total Expenses>>> ", totalexpenses)
         let getData = await Expenses.findAll({
