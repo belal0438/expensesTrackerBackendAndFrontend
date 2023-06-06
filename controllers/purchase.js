@@ -13,6 +13,7 @@ exports.purchasepremium = async (req, res) => {
             if (err) {
                 throw new Error(JSON.stringify(err));
             }
+            // console.log(order);
             await req.getuserdata.createOrder({ orderid: order.id, status: 'PENDING' })
             return res.status(201).json({ order, key_id: rzp.key_id });
         })
@@ -38,7 +39,7 @@ exports.updateTransactionStatus = async (req, res, next) => {
             })
         }
         else {
-            const promise1 = order.update({  paymentid: payment_id, status: 'SUCCESSFUL' })
+            const promise1 = order.update({ paymentid: payment_id, status: 'SUCCESSFUL' })
             const promise2 = req.getuserdata.update({ ispremiumuser: true })
             Promise.all([promise1, promise2]).then(() => {
                 return res.status(202).json({ sucess: true, message: 'Transaction Successful' })

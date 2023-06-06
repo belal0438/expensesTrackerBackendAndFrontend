@@ -5,6 +5,7 @@ const cors = require('cors')
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 const morgan = require('morgan');
+dotenv.config();
 
 const user = require('./models/newuser');
 const expenses = require('./models/expenses');
@@ -23,7 +24,7 @@ const accessLogStream = fs.createWriteStream(
 
 
 app = express();
-dotenv.config();
+
 const bodyPaer = require('body-parser');
 
 app.use(bodyPaer.json())
