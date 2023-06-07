@@ -1,11 +1,8 @@
 
 const path = require('path');
-const fs = require('fs');
 const express = require('express');
 const cors = require('cors')
 const dotenv = require('dotenv');
-const helmet = require('helmet');
-const morgan = require('morgan');
 dotenv.config();
 
 const user = require('./models/newuser');
@@ -15,21 +12,12 @@ const forgotpassword = require('./models/forgotpassword');
 const downloadedUrl = require('./models/download');
 
 
-const accessLogStream = fs.createWriteStream(
-    path.join(__dirname, 'access.log'),
-    { flags: 'a' }
-);
-
-
-
 app = express();
 
 const bodyPaer = require('body-parser');
 
 app.use(bodyPaer.json())
 app.use(cors())
-app.use(helmet());
-app.use(morgan('combined', {stream:accessLogStream}));
 
 const sequelize = require('./util/database')
 const routersData = require('./routes/router');
