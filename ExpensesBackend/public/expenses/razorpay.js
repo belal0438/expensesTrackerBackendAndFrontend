@@ -5,7 +5,7 @@ const rzp_button = document.getElementById('rzp-button1');
 async function GetUserdata() {
     try {
         const token = localStorage.getItem('token');
-        let getdata = await axios.get("http://localhost:3000/getUserdata", { headers: { 'Authorization': token } });
+        let getdata = await axios.get("http://localhost:3000/user/getUserdata", { headers: { 'Authorization': token } });
         // console.log(getdata.data);
         getdata.data.forEach(element => {
             // console.log(element)
@@ -33,14 +33,14 @@ rzp_button.onclick = async (eve) => {
     try {
         eve.preventDefault();
         const token = localStorage.getItem('token');
-        const response = await axios.get("http://localhost:3000/purchasepremium", { headers: { 'Authorization': token } });
+        const response = await axios.get("http://localhost:3000/premiumfeatur/purchasepremium", { headers: { 'Authorization': token } });
         // console.log(response);
         // console.log(response.data);
         var options = {
             "key": response.data.key_id,
             "order_id": response.data.order.id,
             "handler": async function (response) {
-                await axios.post("http://localhost:3000/update_transation_status", {
+                await axios.post("http://localhost:3000/premiumfeatur/update_transation_status", {
                     order_id: response.razorpay_order_id,
                     payment_id: response.razorpay_payment_id
                 }, { headers: { 'Authorization': token } })
@@ -118,7 +118,7 @@ function LeaderBoard() {
         leaderbordBtn.onclick = async (eve) => {
             const token = localStorage.getItem('token');
 
-            const getUserLeaderBoardArray = await axios.get('http://localhost:3000/premium/showLeaderBoard', { headers: { 'Authorization': token } });
+            const getUserLeaderBoardArray = await axios.get('http://localhost:3000/premiumfeatur/showLeaderBoard', { headers: { 'Authorization': token } });
             // console.log(getUserLeaderBoardArray)
             leaderHeading.innerText = "Show Leader Bord";
 
@@ -144,7 +144,7 @@ function fordownloading() {
 
             const token = localStorage.getItem('token');
 
-            const getUserDownloadedData = await axios.get('http://localhost:3000/user/Download', { headers: { 'Authorization': token } });
+            const getUserDownloadedData = await axios.get('http://localhost:3000/download/Download', { headers: { 'Authorization': token } });
             // console.log(getUserDownloadedData.data.fileURl)
             window.location.href = `${getUserDownloadedData.data.fileURl}`
 

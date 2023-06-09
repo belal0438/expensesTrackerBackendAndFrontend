@@ -13,7 +13,7 @@ async function onsubmit(eve) {
             Password: Password.value
         }
         // console.log(obj);
-        let loginData = await axios.post("http://54.147.36.233:3000/login", obj);
+        let loginData = await axios.post("http://localhost:3000/user/login", obj);
         // console.log(loginData);
         alert(loginData.data.message);
 
@@ -22,7 +22,7 @@ async function onsubmit(eve) {
         document.getElementById('useremail').value = "";
         document.getElementById('userpassword').value = "";
         
-        window.location.href = "../views/expenses.html";
+        window.location.href = "../expenses/expenses.html";
 
     } catch (err) {
         console.log(err);

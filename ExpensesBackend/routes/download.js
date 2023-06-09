@@ -10,9 +10,8 @@ const authorization = require('../authorization/author');
 const router = express.Router();
 
 
-router.get('/download/getDownloadUrl', authorization.Authenticate, controllerDownload.GetDownloadedUrl)
+router.get('/getDownloadUrl', authorization.Authenticate, controllerDownload.GetDownloadedUrl)
 
-router.get('/user/Download', authorization.Authenticate, controllerDownload.downloadExpensesData);
-
+router.get('/Download', authorization.Authenticate, controllerDownload.downloadExpensesData);
 
 module.exports = router

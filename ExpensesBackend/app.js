@@ -20,7 +20,7 @@ app.use(bodyPaer.json())
 app.use(cors())
 
 const sequelize = require('./util/database')
-const routersData = require('./routes/router');
+const usersData = require('./routes/Sign');
 const ExpenseRouter = require('./routes/expenses');
 const premiumFeature = require('./routes/premiumfeatur')
 const forgetpassword = require('./routes/password');
@@ -28,21 +28,17 @@ const dowloadRout = require('./routes/download');
 const { Stream } = require('stream');
 
 
-
-app.use(ExpenseRouter);
-app.use(routersData);
-app.use(premiumFeature);
-app.use(forgetpassword);
-app.use(dowloadRout);
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/expenses', ExpenseRouter);
+app.use('/user', usersData);
+app.use('/premiumfeatur', premiumFeature);
+app.use('/password', forgetpassword);
+app.use('/download', dowloadRout);
 
 
 app.use((req, res) => {
-
-    res.sendFile(path.join(__dirname, `public`))
-
+    res.sendFile(path.join(__dirname, `public/${req.url}`))
 })
-
-
 
 user.hasMany(expenses);
 expenses.belongsTo(user)

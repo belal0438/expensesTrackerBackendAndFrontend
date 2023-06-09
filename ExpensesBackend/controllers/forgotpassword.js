@@ -15,13 +15,12 @@ const transaEmailApi = new Sib.TransactionalEmailsApi();
 
 
 
-exports.forgetpassword = async (req, res) => {
+exports.ForgetPassword = async (req, res) => {
     try {
         const Email = req.body.email;
-        // console.log(Email);
         const user = await UserData.findOne({ where: { Email } })
         // console.log(user);
-        console.log(user.id);
+        // console.log(user.id);
         if (user) {
             const id = uuid.v4();
             const resetpassword = await ForgotPass.create({ id: id, active: true, userId: user.id })
@@ -42,7 +41,7 @@ exports.forgetpassword = async (req, res) => {
                 to: receivers,
                 subject: 'reset password',
                 textContent: 'reset your password here',
-                htmlContent: `<a href="http://54.147.36.233:3000/password/reset_password/${id}">Reset Password</a>`
+                htmlContent: `<a href="http://localhost:3000/password/reset_password/${id}">Reset Password</a>`
             });
 
 
@@ -64,7 +63,7 @@ exports.reset_password = async (req, res) => {
     try {
         const id = req.params.id
         forgtepsssrequest = await ForgotPass.findOne({ where: { id: id } });
-        // console.log(forgtepsssrequest);
+        console.log(forgtepsssrequest);
         if (forgtepsssrequest) {
             await forgtepsssrequest.update({ active: false });
             res.status(200).send(`<html>
