@@ -42,7 +42,7 @@ exports.forgetpassword = async (req, res) => {
                 to: receivers,
                 subject: 'reset password',
                 textContent: 'reset your password here',
-                htmlContent: `<a href="http://localhost:3000/password/reset_password/${id}">Reset Password</a>`
+                htmlContent: `<a href="http://54.147.36.233:3000/password/reset_password/${id}">Reset Password</a>`
             });
 
 

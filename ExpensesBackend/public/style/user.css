@@ -1,0 +1,86 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(164, 247, 247);
+}
+
+#expensesList {
+    text-align: center;
+    margin-top: auto;
+}
+
+#rzp-button1 {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#my_form {
+
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.head {
+    margin: 8px 0px;
+}
+
+#premiunList {
+    display: flex;
+    text-align: left;
+}
+
+#BtnLeader,#BtnDownload,#BtnDownloadedUrl{
+    margin-left: 25px;
+}
+
+#leader,
+#leaderboard {
+    text-align: center;
+}
+
+.nameContainer,
+.emailContainer,
+.numberContainer,
+.submitForm,
+.passwordContainer {
+    margin: 8px 5px;
+    font-size: 20px;
+
+}
+
+.headcontainer {
+    padding-top: 10px;
+    padding-left: 20px;
+    background-color: rgb(47, 45, 45);
+    text-align: center;
+    height: 40px;
+    display: flex;
+    gap: 50px;
+}
+
+#user {
+    color: aliceblue;
+    text-decoration: none;
+}
+
+#login {
+    color: aliceblue;
+    text-decoration: none;
+}
+.submitForm{
+    display: flex;
+    gap: 30px;
+    text-align: center;
+    margin-left: 40%;
+}
+#forgetPass{
+    font-size: 15px;
+}
+#expenses {
+    color: aliceblue;
+    text-decoration: none;
+}
+
+#Pagination{
+    text-align: center;
+}
