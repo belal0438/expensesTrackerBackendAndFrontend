@@ -19,7 +19,7 @@ async function onsubmit(eve) {
             Password: Password.value
         }
         // console.log(obj);
-        let userloginData = await axios.post('http://localhost:3000/user/signup', obj)
+        let userloginData = await axios.post('http://54.147.36.233:3000/user/signup', obj)
         console.log(userloginData);
 
         document.getElementById('username').value = "";

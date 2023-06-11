@@ -10,7 +10,7 @@ async function onsubmit(eve) {
         const EmailId = document.getElementById('useremail');
 
         let obj = { email: EmailId.value };
-        let UseremaiIdPost = await axios.post("http://localhost:3000/password/ForgetPassword", obj);
+        let UseremaiIdPost = await axios.post("http://54.147.36.233:3000/password/ForgetPassword", obj);
         // console.log(UseremaiIdPost);
     } catch (err) {
         console.log(err)
