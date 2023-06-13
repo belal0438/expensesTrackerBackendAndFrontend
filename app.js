@@ -58,7 +58,7 @@ sequelize
     .sync()
     .then(result => {
         // console.log(result);
-        console.log("Table created")
+        // console.log("Table created")
         app.listen(process.env.PORT || 3000);
     })
     .catch(err => console.log(err));
